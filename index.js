@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 require('dotenv').config();
 
 const Document = require("./Document")
+const port = process.env.PORT || 3001
 
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.DB_URI,
@@ -12,9 +13,9 @@ mongoose.connect(process.env.DB_URI,
     .then(() => console.log("DB Connected"))
 
 
-const io = require("socket.io")(3001, {
+const io = require("socket.io")(port, {
     cors: {
-        origins: "http://localhost:3000",
+        origins: "*",
         methods: ["GET", "POST"]
     }
 })
