@@ -20,6 +20,18 @@ const io = require("socket.io")(port, {
     }
 })
 
+var http = require('http');
+
+const server = http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write('rich text editor by Sanaullah Sani');
+    res.end();
+})
+
+server.listen(port, 'localhost', () => {
+    console.log("server running");
+});
+
 io.on("connection", socket => {
     socket.on("get-document", async documentID => {
         try {
